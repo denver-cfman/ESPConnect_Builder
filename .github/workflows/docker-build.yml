@@ -1,0 +1,22 @@
+name: Docker Build CI
+
+# 1. Triggers: When does this run?
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  build:
+    # 2. The Environment: Where does this run?
+    runs-on: ubuntu-latest
+
+    steps:
+      # 3. Checkout: Downloads your code to the runner
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      # 4. Build: Runs the standard docker build command
+      - name: Build Docker Image
+        run: docker build . --file Dockerfile --tag my-app-image:latest
